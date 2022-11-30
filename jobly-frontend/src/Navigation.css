@@ -1,0 +1,14 @@
+.Navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Navigation a.active {
+  text-decoration: underline;
+}
+
+.Navigation a {
+  text-decoration: none;
+}
