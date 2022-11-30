@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-import "./CompanyCard.css";
+import Card from "react-bootstrap/Card";
+import "./CompanyCard.css"
 
 /**
  * CompanyCard:
@@ -15,13 +16,19 @@ import "./CompanyCard.css";
  */
 function CompanyCard({ handle, name, description, logoUrl }) {
   return (
-    <div className="CompanyCard">
+    <Card className="CompanyCard m-4">
       <NavLink to={`/companies/${handle}`}>
-        <h1>{name}</h1>
-        <p>{description}</p>
-        {logoUrl !== null && <img src={logoUrl} alt={handle} />}
+        <Card.Header as="h1">
+          {name}
+        </Card.Header>
+        <Card.Body>
+          <Card.Text>
+            <p>{description}</p>
+          </Card.Text>
+          {logoUrl !== null && <Card.Img src={logoUrl} alt={handle} variant="right"/>}
+        </Card.Body>
       </NavLink>
-    </div>
+    </Card>
   );
 }
 

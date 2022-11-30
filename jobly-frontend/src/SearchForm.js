@@ -1,3 +1,7 @@
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import "./SearchForm.css";
+
 /**
  * SearchForm:
  *
@@ -11,10 +15,17 @@
  */
 function SearchForm({ searchTerm, handleSubmit, handleChange }) {
   return (
-    <form className="SearchForm" onSubmit={handleSubmit}>
-      <input value={searchTerm} onChange={handleChange} />
-      <button>Submit</button>
-    </form>
+    <Form className="SearchForm" onSubmit={handleSubmit}>
+      <Form.Group>
+        <Form.Control
+          value={searchTerm}
+          onChange={handleChange}
+          placeholder="Enter search term"
+          className="SearchForm-bar mt-5 form-control-lg"
+        />
+        <Button type="submit" className="btn-lg btn-primary">Submit</Button>
+      </Form.Group>
+    </Form>
   );
 }
 

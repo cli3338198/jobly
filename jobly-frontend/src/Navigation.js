@@ -1,5 +1,8 @@
 import { NavLink } from "react-router-dom";
-import "./Navigation.css";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import "./Navigation.css"
 
 /**
  * Navigation:
@@ -12,11 +15,21 @@ import "./Navigation.css";
  */
 function Navigation() {
   return (
-    <nav className="Navigation">
-      <NavLink to="/">Jobly</NavLink>
-      <NavLink to="/companies">Companies</NavLink>
-      <NavLink to="/jobs">Jobs</NavLink>
-    </nav>
+    <Navbar bg="light" sticky="top" className="Navigation">
+      <Container>
+        <Navbar.Brand>
+          <NavLink to="/">Jobly</NavLink>
+        </Navbar.Brand>
+        <Nav className="nav-right">
+          <Nav.Link>
+            <NavLink to="/companies">Companies</NavLink>
+          </Nav.Link>
+          <Nav.Link>
+            <NavLink to="/jobs">Jobs</NavLink>
+          </Nav.Link>
+        </Nav>
+      </Container>
+    </Navbar>
   );
 }
 

@@ -51,7 +51,7 @@ function CompanyList() {
   }
 
   return (
-    <div className="CompanyList">
+    <div className="CompanyList container">
       <SearchForm
         searchTerm={searchTerm}
         handleChange={handleChange}

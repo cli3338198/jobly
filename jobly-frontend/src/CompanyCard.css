@@ -1,12 +1,7 @@
-.CompanyCard {
-  background-color: grey;
+.CompanyCard a {
+  color: black;
 }
 
 .CompanyCard a:hover {
-  color: white;
-}
-
-.CompanyCard a {
-  text-decoration: none;
-  color: black;
+  color: grey;
 }

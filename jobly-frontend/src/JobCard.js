@@ -1,4 +1,4 @@
-import "./JobCard.css";
+import Card from "react-bootstrap/Card";
 
 /**
  * JobCard:
@@ -14,12 +14,20 @@ import "./JobCard.css";
  */
 function JobCard({ title, salary, equity, companyName }) {
   return (
-    <div className="JobCard">
-      <h1>{title}</h1>
-      <p>{companyName}</p>
-      <i>Salary: {salary}</i>
-      <i>Equity: {equity}</i>
-    </div>
+    <Card className="JobCard m-4">
+      <Card.Header as="h1">{title}</Card.Header>
+      <Card.Body>
+        <Card.Title>
+          {companyName}
+        </Card.Title>
+        <Card.Text className="m-0">
+          Salary: {salary}
+        </Card.Text>
+        <Card.Text className="m-0">
+          Equity: {equity}
+        </Card.Text>
+      </Card.Body>
+    </Card>
   );
 }
 
