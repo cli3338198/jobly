@@ -2,6 +2,7 @@ import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./SearchForm.css";
+import { debounce } from "./utils";
 
 /**
  * SearchForm:
@@ -20,6 +21,7 @@ function SearchForm({ searchFor }) {
   /**Handle the input change. */
   function handleChange(evt) {
     setValue(evt.target.value);
+    searchFor(evt.target.value);
   }
 
   /**Handle search submit. */
@@ -32,12 +34,11 @@ function SearchForm({ searchFor }) {
     <Form className="SearchForm" onSubmit={handleSubmit}>
       <Form.Group>
         <Form.Control
-          value={value}
-          onChange={handleChange}
+          onChange={debounce(handleChange, 300)}
           placeholder="Enter search term"
           className="SearchForm-bar mt-5 form-control-lg"
         />
-        <Button type="submit" className="btn-lg btn-primary">
+        <Button type="submit" className="btn-lg btn-primary" disabled>
           Submit
         </Button>
       </Form.Group>
