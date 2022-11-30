@@ -20,44 +20,42 @@ function JobList() {
 
   useEffect(() => {
     // make api call to get all companies
-    async function getJobs() {
-      const jobsResults = await JoblyApi.getJobs();
-      setJobs(jobsResults);
-    }
+    // async function getJobs() {
+    //   const jobsResults = await JoblyApi.getJobs();
+    //   setJobs(jobsResults);
+    // }
 
-    getJobs();
+    // getJobs();
+    search();
   }, []);
 
-  /**Set the searchterm. */
-  function handleChange(evt) {
-    setSearchTerm(evt.target.value);
+  /**Handle search submit. */
+  // async function handleSubmit(evt) {
+  //   evt.preventDefault();
+  //   // make the api call to companies
+  //   const jobsResults = await JoblyApi.getJobs(
+  //     searchTerm.length > 0 ? { title: searchTerm } : {}
+  //   );
+  //   setJobs(jobsResults);
+  // }
+
+  async function search() {
+    const jobsResults = await JoblyApi.getJobs(
+      searchTerm.length > 0 ? { title: searchTerm } : {}
+    );
+    setJobs(jobsResults);
   }
 
-  /**Handle search submit. */
-  async function handleSubmit(evt) {
-    evt.preventDefault();
-    // make the api call to companies
-    const jobsResults = await JoblyApi.getJobs(
-      searchTerm.length > 0 ? {title: searchTerm} : {}
-    );
-    // Old code:
-    // if (searchTerm.length > 0) {
-    //   jobsResults = await JoblyApi.getJobs({
-    //     title: searchTerm,
-    //   });
-    // } else {
-    //   jobsResults = await JoblyApi.getJobs();
-    // }
-    setJobs(jobsResults);
+  function handleSubmit(evt) {
+    return (value) => {
+      evt.preventDefault();
+      setSearchTerm(value);
+    };
   }
 
   return (
     <div className="JobList">
-      <SearchForm
-        searchTerm={searchTerm}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      />
+      <SearchForm searchFor={search} />
       {jobs.map((j) => (
         <JobCard key={j.id} {...j} />
       ))}
