@@ -11,7 +11,7 @@ import "./CompanyCard.css";
  *
  * State: none
  *
- * CompanyList -> CompanyCard
+ * CompanyList -> CompanyCard -> NavLink
  */
 function CompanyCard({ handle, name, description, logoUrl }) {
   return (

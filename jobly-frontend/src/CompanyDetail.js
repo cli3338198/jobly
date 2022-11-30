@@ -6,11 +6,11 @@ import JobCard from "./JobCard";
 /**
  * CompanyDetail:
  *
- * Props:
+ * Props: None
  *
- * State:
+ * State: company: object like {name: "", description: "", jobs: [...]}
  *
- * Routes -> CompanyDetail
+ * Routes -> CompanyDetail -> JobCard
  */
 
 function CompanyDetail() {

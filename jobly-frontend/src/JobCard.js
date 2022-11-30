@@ -10,7 +10,7 @@ import "./JobCard.css";
  *
  * State: none
  *
- * CompanyList -> CompanyCard
+ * { JobList, CompanyDetail }  -> JobCard
  */
 function JobCard({ title, salary, equity, companyName }) {
   return (

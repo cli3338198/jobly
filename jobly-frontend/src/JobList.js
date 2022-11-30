@@ -37,14 +37,17 @@ function JobList() {
   async function handleSubmit(evt) {
     evt.preventDefault();
     // make the api call to companies
-    let jobsResults;
-    if (searchTerm.length > 0) {
-      jobsResults = await JoblyApi.getJobs({
-        title: searchTerm,
-      });
-    } else {
-      jobsResults = await JoblyApi.getJobs();
-    }
+    const jobsResults = await JoblyApi.getJobs(
+      searchTerm.length > 0 ? {title: searchTerm} : {}
+    );
+    // Old code:
+    // if (searchTerm.length > 0) {
+    //   jobsResults = await JoblyApi.getJobs({
+    //     title: searchTerm,
+    //   });
+    // } else {
+    //   jobsResults = await JoblyApi.getJobs();
+    // }
     setJobs(jobsResults);
   }
 
