@@ -1,0 +1,7 @@
+.JobCard {
+  background-color: grey;
+}
+
+.JobCard i {
+  display: block;
+}
