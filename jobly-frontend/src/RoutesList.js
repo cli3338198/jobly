@@ -1,4 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import Homepage from "./Homepage";
+import CompanyDetail from "./CompanyDetail";
+import CompanyList from "./CompanyList";
+import JobList from "./JobList";
+
 /**
  * RoutesList:
  *
@@ -11,10 +16,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 function RoutesList() {
   return (
     <Routes>
-      <Route path="/" element={<div>Homepage</div>} />
-      <Route path="/companies/:name" element={<div>Company detail</div>} />
-      <Route path="/companies" element={<div>Companies</div>} />
-      <Route path="/jobs" element={<div>Jobs</div>} />
+      <Route path="/" element={<Homepage />} />
+      <Route path="/companies/:handle" element={<CompanyDetail />} />
+      <Route path="/companies" element={<CompanyList />} />
+      <Route path="/jobs" element={<JobList />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
