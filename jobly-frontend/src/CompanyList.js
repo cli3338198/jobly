@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Spinner from "./Spinner";
 import SearchForm from "./SearchForm";
 import CompanyCard from "./CompanyCard";
 import JoblyApi from "./api";
@@ -8,58 +9,44 @@ import JoblyApi from "./api";
  *
  * Props: none
  *
- * State: companies - list of companies
- *        searchTerm - string
+ * State: companies: list of objects like [{name: "", description: "", jobs: [...]}, ...{...}]
  *
  * Routes -> CompanyList -> { SearchForm, CompanyCard }
  */
 function CompanyList() {
-  const [companies, setCompanies] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [companies, setCompanies] = useState(null);
+  // TODO: searchFilters
+
+  console.log("CompanyList");
 
   useEffect(() => {
-    // make api call to get all companies
-    async function getCompanies() {
-      const companiesResults = await JoblyApi.getCompanies();
-      setCompanies(companiesResults);
-    }
-
-    getCompanies();
+    search();
   }, []);
 
-  /**Set the searchterm. */
-  function handleChange(evt) {
-    setSearchTerm(evt.target.value);
+  /**Search for companies and sets the companies state.
+   * Called from SearchForm and useEffect.
+   */
+  async function search(searchTerm = "") {
+    const companiesResults = await JoblyApi.getCompanies(
+      searchTerm.length > 0 ? { nameLike: searchTerm } : {}
+    );
+    setCompanies(companiesResults);
   }
 
-  /**Handle search submit. */
-  async function handleSubmit(evt) {
-    evt.preventDefault();
-    // make the api call to companies
-    const companiesResults = await JoblyApi.getCompanies(
-      searchTerm.length > 0 ? {nameLike: searchTerm} : {}
-    );
-    // Old code:
-    // if (searchTerm.length > 0) {
-    //   companiesResults = await JoblyApi.getCompanies({
-    //     nameLike: searchTerm,
-    //   });
-    // } else {
-    //   companiesResults = await JoblyApi.getCompanies();
-    // }
-    setCompanies(companiesResults);
+  if (companies === null) {
+    return <Spinner />;
   }
 
   return (
     <div className="CompanyList container">
-      <SearchForm
-        searchTerm={searchTerm}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      />
-      {companies.map((c) => (
-        <CompanyCard key={c.name} {...c} />
-      ))}
+      <SearchForm searchFor={search} />
+      {companies.length > 0 ? (
+        companies.map((c) => <CompanyCard key={c.name} {...c} />)
+      ) : (
+        <p className="d-flex justify-content-center align-items-center mt-5">
+          Nothing Found
+        </p>
+      )}
     </div>
   );
 }

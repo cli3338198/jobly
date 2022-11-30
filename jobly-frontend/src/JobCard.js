@@ -13,19 +13,15 @@ import Card from "react-bootstrap/Card";
  * { JobList, CompanyDetail }  -> JobCard
  */
 function JobCard({ title, salary, equity, companyName }) {
+  console.log("JobCard");
+
   return (
     <Card className="JobCard m-4">
       <Card.Header as="h1">{title}</Card.Header>
       <Card.Body>
-        <Card.Title>
-          {companyName}
-        </Card.Title>
-        <Card.Text className="m-0">
-          Salary: {salary}
-        </Card.Text>
-        <Card.Text className="m-0">
-          Equity: {equity}
-        </Card.Text>
+        <Card.Title>{companyName}</Card.Title>
+        <Card.Text className="m-0">Salary: {salary}</Card.Text>
+        <Card.Text className="m-0">Equity: {equity}</Card.Text>
       </Card.Body>
     </Card>
   );

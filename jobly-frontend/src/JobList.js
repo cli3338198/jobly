@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Spinner from "./Spinner";
 import SearchForm from "./SearchForm";
 import JobCard from "./JobCard";
 import JoblyApi from "./api";
@@ -8,57 +9,50 @@ import JoblyApi from "./api";
  *
  * Props: None
  *
- * State: jobs - list of jobs
- *        searchTerm - string
+ * State: jobs - list of jobs like
+ *        [{companyHandle: "",
+ *          companyName: "",
+ *          equity: "",
+ *          id: 1,
+ *          salary: 110000,
+ *          title: ""},
+ *            ...{...}]
  *
  * Routes -> JobList -> { JobCard, SearchForm }
  */
-
 function JobList() {
-  const [jobs, setJobs] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [jobs, setJobs] = useState(null);
+
+  console.log("JobList");
 
   useEffect(() => {
-    // make api call to get all companies
-    // async function getJobs() {
-    //   const jobsResults = await JoblyApi.getJobs();
-    //   setJobs(jobsResults);
-    // }
-
-    // getJobs();
     search();
   }, []);
 
-  /**Handle search submit. */
-  // async function handleSubmit(evt) {
-  //   evt.preventDefault();
-  //   // make the api call to companies
-  //   const jobsResults = await JoblyApi.getJobs(
-  //     searchTerm.length > 0 ? { title: searchTerm } : {}
-  //   );
-  //   setJobs(jobsResults);
-  // }
-
-  async function search() {
+  /**Search for jobs and sets the jobs state.
+   * Called from SearchForm and useEffect.
+   */
+  async function search(searchTerm = "") {
     const jobsResults = await JoblyApi.getJobs(
       searchTerm.length > 0 ? { title: searchTerm } : {}
     );
     setJobs(jobsResults);
   }
 
-  function handleSubmit(evt) {
-    return (value) => {
-      evt.preventDefault();
-      setSearchTerm(value);
-    };
+  if (jobs === null) {
+    return <Spinner />;
   }
 
   return (
     <div className="JobList">
       <SearchForm searchFor={search} />
-      {jobs.map((j) => (
-        <JobCard key={j.id} {...j} />
-      ))}
+      {jobs.length > 0 ? (
+        jobs.map((j) => <JobCard key={j.id} {...j} />)
+      ) : (
+        <p className="d-flex justify-content-center align-items-center mt-5">
+          Nothing Found
+        </p>
+      )}
     </div>
   );
 }

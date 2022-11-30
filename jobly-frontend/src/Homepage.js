@@ -1,4 +1,4 @@
-import "./Homepage.css"
+import "./Homepage.css";
 
 /**
  * Homepage:
@@ -10,12 +10,16 @@ import "./Homepage.css"
  * Routes -> Homepage
  */
 function Homepage() {
-  return <div className="Homepage">
-    <div className="container text-center justify-content-center align-items-center">
-      <h1 className="mb-4 fw-bold">Jobly</h1>
-      <p className="lead">All the jobs in one, convenient place.</p>
+  console.log("Homepage");
+
+  return (
+    <div className="Homepage">
+      <div className="container text-center justify-content-center align-items-center">
+        <h1 className="mb-4 fw-bold">Jobly</h1>
+        <p className="lead">All the jobs in one, convenient place.</p>
+      </div>
     </div>
-  </div>;
+  );
 }
 
 export default Homepage;

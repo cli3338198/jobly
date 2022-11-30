@@ -6,14 +6,16 @@ import "./SearchForm.css";
 /**
  * SearchForm:
  *
- * Props: handleSubmit - function, to be called in parent component
+ * Props: search - function, to be called in parent
  *
- * State: none
+ * State: value - string
  *
  * { JobsList, CompaniesList } -> SearchForm
  */
 function SearchForm({ searchFor }) {
   const [value, setValue] = useState("");
+
+  console.log("SearchForm");
 
   /**Handle the input change. */
   function handleChange(evt) {
@@ -23,9 +25,7 @@ function SearchForm({ searchFor }) {
   /**Handle search submit. */
   async function handleSubmit(evt) {
     evt.preventDefault();
-    // make the api call to companies
     searchFor(value);
-    setValue(value);
   }
 
   return (

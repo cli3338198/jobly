@@ -14,6 +14,8 @@ import JobList from "./JobList";
  * App -> RoutesList -> Routes
  */
 function RoutesList() {
+  console.log("RoutesList");
+
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />

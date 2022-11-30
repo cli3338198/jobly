@@ -38,7 +38,6 @@ class JoblyApi {
   // Individual API routes
 
   /** Get list of all companies.
-   *
    * filters - object, like { nameLike: string }
    */
   static async getCompanies(filters) {

@@ -12,6 +12,8 @@ import RoutesList from "./RoutesList";
  * App -> { Navigation, RoutesList }
  */
 function App() {
+  console.log("App");
+
   return (
     <div className="App">
       <BrowserRouter>
