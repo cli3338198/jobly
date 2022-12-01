@@ -8,3 +8,9 @@ body {
 a {
   text-decoration: none;
 }
+
+.none {
+  font-size: 36px;
+  color: white;
+  text-shadow: 2px 2px 5px black;
+}

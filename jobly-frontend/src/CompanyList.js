@@ -15,9 +15,9 @@ import JoblyApi from "./api";
  */
 function CompanyList() {
   const [companies, setCompanies] = useState(null);
-  // TODO: searchFilters
+  const [currSearch, setCurrSearch] = useState();
 
-  console.log("CompanyList");
+  console.log("CompanyList", currSearch);
 
   useEffect(() => {
     search();
@@ -31,6 +31,7 @@ function CompanyList() {
       searchTerm.length > 0 ? { nameLike: searchTerm } : {}
     );
     setCompanies(companiesResults);
+    setCurrSearch(searchTerm);
   }
 
   if (companies === null) {
@@ -43,7 +44,7 @@ function CompanyList() {
       {companies.length > 0 ? (
         companies.map((c) => <CompanyCard key={c.name} {...c} />)
       ) : (
-        <p className="d-flex justify-content-center align-items-center mt-5">
+        <p className="none lead d-flex justify-content-center mt-5">
           Nothing Found
         </p>
       )}

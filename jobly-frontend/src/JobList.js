@@ -44,12 +44,12 @@ function JobList() {
   }
 
   return (
-    <div className="JobList">
+    <div className="JobList container">
       <SearchForm searchFor={search} />
       {jobs.length > 0 ? (
         jobs.map((j) => <JobCard key={j.id} {...j} />)
       ) : (
-        <p className="d-flex justify-content-center align-items-center mt-5">
+        <p className="none lead d-flex justify-content-center mt-5">
           Nothing Found
         </p>
       )}
