@@ -1,4 +1,6 @@
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import "./JobCard.css";
 
 /**
  * JobCard:
@@ -22,9 +24,11 @@ function JobCard({ title, salary, equity, companyName }) {
         <Card.Title>{companyName}</Card.Title>
         <Card.Text className="m-0">Salary: {salary}</Card.Text>
         <Card.Text className="m-0">Equity: {equity}</Card.Text>
+        <Button className="JobCard-Btn">Apply</Button>
       </Card.Body>
     </Card>
   );
+  // TODO: Apply Button
 }
 
 export default JobCard;
