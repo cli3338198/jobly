@@ -24,7 +24,6 @@ function LoginForm({ login }) {
 
   const [formData, setFormData] = useState({
     username: "",
-
     password: "",
   });
   const [errors, setErrors] = useState([]);

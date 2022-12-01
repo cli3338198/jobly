@@ -10,13 +10,15 @@ import ProfileForm from "./ProfileForm"
 /**
  * RoutesList:
  *
- * Props: none
+ * Props: login - fn to be called in parent
+ *        signUp - fn to be called in parent
+ *        editProfile - fn to be called in parent
  *
  * State: none
  *
  * App -> RoutesList -> Routes
  */
-function RoutesList() {
+function RoutesList({ login, signUp, editProfile }) {
   console.log("RoutesList");
 
   return (
@@ -25,9 +27,9 @@ function RoutesList() {
       <Route path="/companies/:handle" element={<CompanyDetail />} />
       <Route path="/companies" element={<CompanyList />} />
       <Route path="/jobs" element={<JobList />} />
-      <Route path="/login" element={<LoginForm />} />
-      <Route path="/signup" element={<SignUpForm />} />
-      <Route path="/profile" element={<ProfileForm />} />
+      <Route path="/login" element={<LoginForm login={login}/>} />
+      <Route path="/signup" element={<SignUpForm signUp={signUp}/>} />
+      <Route path="/profile" element={<ProfileForm editProfile={editProfile}/>} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

@@ -3,18 +3,21 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import "./Navigation.css";
+import { useContext } from "react";
+import UserContext from "./UserContext";
 
 /**
  * Navigation:
  *
- * Props: none
+ * Props: logout - fn to be called in parent
  *
  * State: none
  *
  * App -> Navigation -> Navlink
  */
-function Navigation() {
+function Navigation({ logout }) {
   console.log("Navigation");
+  const { currUser } = useContext(UserContext);
 
   return (
     <Navbar bg="light" sticky="top" className="Navigation">
@@ -23,6 +26,7 @@ function Navigation() {
           <NavLink to="/">Jobly</NavLink>
         </Navbar.Brand>
         <Nav className="nav-right">
+          {currUser && <>
           <Nav.Link as="span">
             <NavLink to="/companies">Companies</NavLink>
           </Nav.Link>
@@ -32,13 +36,18 @@ function Navigation() {
           <Nav.Link as="span">
             <NavLink to="/profile">Profile</NavLink>
           </Nav.Link>
-          {/* TODO: */}
+          <Nav.Link as="span">
+            <NavLink to="/" onClick={logout}>Logout</NavLink>
+          </Nav.Link>
+          </>}
+          {!currUser && <>
           <Nav.Link as="span">
             <NavLink to="/signup">Register</NavLink>
           </Nav.Link>
           <Nav.Link as="span">
             <NavLink to="/login">Login</NavLink>
           </Nav.Link>
+          </>}
         </Nav>
       </Container>
     </Navbar>

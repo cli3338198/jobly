@@ -11,8 +11,8 @@ import Alert from "./Alert";
  *
  * State: formData - like {
     username: "",
-    first: "",
-    last: "",
+    firstName: "",
+    lastName: "",
     password: "",
     confirmPassword: "",
     email: "",
@@ -28,8 +28,8 @@ function SignUpForm({ signUp }) {
 
   const [formData, setFormData] = useState({
     username: "",
-    first: "",
-    last: "",
+    firstName: "",
+    lastName: "",
     password: "",
     confirmPassword: "",
     email: "",
@@ -48,15 +48,24 @@ function SignUpForm({ signUp }) {
   /**Handle form submission. */
   async function handleSubmit(evt) {
     evt.preventDefault();
+    if(formData.password !== formData.confirmPassword) {
+      console.log("Error happened here!!!!!")
+      setErrors(errs => [...errs, "Passwords do not match"])
+      return;
+    }
     try {
       // make axios call
-      await signUp(formData);
+      const copy = {...formData};
+      delete copy["confirmPassword"]
+      await signUp(copy);
       navigate("/");
       // reroute to main page
     } catch (err) {
       // set errors
-      console.log(err);
-      setErrors((prevErrors) => [...prevErrors, err]);
+      console.log(err, "<-------------");
+      setErrors(errs => [...errs, err]);
+    } finally {
+      setTimeout(() => setErrors([]), 5000);
     }
   }
 
@@ -95,8 +104,8 @@ function SignUpForm({ signUp }) {
       <Form.Group>
         <Form.Label>First Name:</Form.Label>
         <Form.Control
-          value={formData.first}
-          name="first"
+          value={formData.firstName}
+          name="firstName"
           onChange={handleChange}
           required
         />
@@ -104,8 +113,8 @@ function SignUpForm({ signUp }) {
       <Form.Group>
         <Form.Label>Last Name:</Form.Label>
         <Form.Control
-          value={formData.last}
-          name="last"
+          value={formData.lastName}
+          name="lastName"
           onChange={handleChange}
           required
         />
@@ -120,7 +129,7 @@ function SignUpForm({ signUp }) {
           required
         />
       </Form.Group>
-      {errors.length > 0 && errors.map((e, i) => <Alert key={i} err={e} />)}
+      {errors.length > 0 && <Alert errors={errors} />}
       <Button as="button" className="btn btn-primary">
         Submit
       </Button>

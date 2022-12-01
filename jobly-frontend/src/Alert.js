@@ -8,10 +8,12 @@ import Alert from "react-bootstrap/Alert";
  *
  * {} -> Alert
  */
-function MyAlert(err) {
+function MyAlert({ errors = [] }) {
   return (
     <Alert className="mt-3" variant="danger">
-      {err.err.message}
+      {errors.map((err, i) => (
+        <p key={i}>{err}</p>
+      ))}
     </Alert>
   );
 }
