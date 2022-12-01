@@ -29,6 +29,16 @@ function Navigation() {
           <Nav.Link as="span">
             <NavLink to="/jobs">Jobs</NavLink>
           </Nav.Link>
+          <Nav.Link as="span">
+            <NavLink to="/profile">Profile</NavLink>
+          </Nav.Link>
+          {/* TODO: */}
+          <Nav.Link as="span">
+            <NavLink to="/signup">Register</NavLink>
+          </Nav.Link>
+          <Nav.Link as="span">
+            <NavLink to="/login">Login</NavLink>
+          </Nav.Link>
         </Nav>
       </Container>
     </Navbar>
