@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Form";
-import Alert from "./Alert";
+import MyAlert from "./MyAlert";
 
 /**
  * SignUpForm:
@@ -73,7 +73,7 @@ function LoginForm({ login }) {
           required
         />
       </Form.Group>
-      {errors.length > 0 && <Alert errors={errors} />}
+      {errors.length > 0 && <MyAlert errors={errors} />}
       <Button as="button" className="btn btn-primary">
         Submit
       </Button>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Spinner from "./Spinner";
+import MySpinner from "./MySpinner";
 import SearchForm from "./SearchForm";
 import JobCard from "./JobCard";
 import JoblyApi from "./api";
@@ -42,7 +42,7 @@ function JobList() {
   }
 
   if (jobs === null) {
-    return <Spinner />;
+    return <MySpinner />;
   }
 
   return (

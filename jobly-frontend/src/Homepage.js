@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import "./Homepage.css";
-import UserContext from "./UserContext";
+import userContext from "./userContext";
 
 /**
  * Homepage:
@@ -14,7 +14,7 @@ import UserContext from "./UserContext";
 function Homepage() {
   console.log("Homepage");
 
-  const { currUser } = useContext(UserContext);
+  const { currUser } = useContext(userContext);
 
   return (
     <div className="Homepage">

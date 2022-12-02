@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Spinner from "./Spinner";
 import JoblyApi from "./api";
 import JobCard from "./JobCard";
 import "./CompanyDetail.css";
+import MySpinner from "./MySpinner";
 
 /**
  * CompanyDetail:
@@ -30,7 +30,7 @@ function CompanyDetail() {
   }, [handle]);
 
   if (company === null) {
-    return <Spinner />;
+    return <MySpinner />;
   }
 
   return (

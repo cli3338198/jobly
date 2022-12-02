@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import "./Navigation.css";
 import { useContext } from "react";
-import UserContext from "./UserContext";
+import userContext from "./userContext";
 
 /**
  * Navigation:
@@ -18,7 +18,7 @@ import UserContext from "./UserContext";
 function Navigation({ logout }) {
   console.log("Navigation");
 
-  const { currUser } = useContext(UserContext);
+  const { currUser } = useContext(userContext);
 
   return (
     <Navbar bg="light" sticky="top" className="Navigation">

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Form";
-import Alert from "./Alert";
+import MyAlert from "./MyAlert";
 
 /**
  * SignUpForm:
@@ -48,10 +48,11 @@ function SignUpForm({ signUp }) {
   /**Handle form submission. */
   async function handleSubmit(evt) {
     evt.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
-      setErrors(["Passwords do not match"]);
-      return;
+      return setErrors(["Passwords must match."]);
     }
+
     try {
       // make axios call
       const copy = { ...formData };
@@ -125,7 +126,7 @@ function SignUpForm({ signUp }) {
           required
         />
       </Form.Group>
-      {errors.length > 0 && <Alert errors={errors} />}
+      {errors.length > 0 && <MyAlert errors={errors} />}
       <Button as="button" className="btn btn-primary">
         Submit
       </Button>
@@ -134,4 +135,3 @@ function SignUpForm({ signUp }) {
 }
 
 export default SignUpForm;
-// TODO: error location!

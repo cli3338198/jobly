@@ -2,13 +2,12 @@ import Alert from "react-bootstrap/Alert";
 /**
  * MyAlert:
  *
- * Props: errors - Error[]
+ * Props: errors - list of Errors
  *
  * State:
  *
  * {} -> Alert
  */
-//TODO: generic alert
 function MyAlert({ errors = [] }) {
   return (
     <Alert className="mt-3" variant="danger">

@@ -4,7 +4,8 @@ import jwt_decode from "jwt-decode";
 import JoblyApi from "./api";
 import Navigation from "./Navigation";
 import RoutesList from "./RoutesList";
-import UserContext from "./UserContext";
+import userContext from "./userContext";
+import MySpinner from "./MySpinner";
 
 /**
  * App:
@@ -19,16 +20,18 @@ import UserContext from "./UserContext";
 function App() {
   console.log("App");
 
+  const [token, setToken] = useState(() => localStorage.getItem("token"));
+  // const [token, setToken] = useState(null);
   const [currUser, setCurrUser] = useState(null);
-  const [token, setToken] = useState(null);
 
-  useEffect(() => {
-    // get token from localstorage
-    const localToken = localStorage.getItem("token");
-    if (localToken) {
-      setToken(localToken);
-    }
-  }, []);
+  // DON'T NEED
+  // useEffect(() => {
+  //   // get token from localstorage
+  //   const localToken = localStorage.getItem("token");
+  //   if (localToken) {
+  //     setToken(localToken);
+  //   }
+  // }, []);
 
   useEffect(() => {
     async function getUser() {
@@ -70,11 +73,13 @@ function App() {
     localStorage.removeItem("token");
   }
 
-  //TODO: spinner loading
+  if (token && !currUser) {
+    return <MySpinner />;
+  }
 
   return (
     <div className="App">
-      <UserContext.Provider
+      <userContext.Provider
         value={{
           currUser,
         }}
@@ -83,7 +88,7 @@ function App() {
           <Navigation logout={logout} />
           <RoutesList login={login} signUp={signUp} editProfile={editProfile} />
         </BrowserRouter>
-      </UserContext.Provider>
+      </userContext.Provider>
     </div>
   );
 }

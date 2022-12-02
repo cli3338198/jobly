@@ -2,9 +2,9 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Form";
-import Alert from "./Alert";
-import UserContext from "./UserContext";
-import MySpinner from "./Spinner";
+import MyAlert from "./MyAlert";
+import userContext from "./userContext";
+import MySpinner from "./MySpinner";
 
 /**
  * ProfileForm:
@@ -26,26 +26,26 @@ function ProfileForm({ editProfile }) {
 
   const navigate = useNavigate();
 
-  const { currUser } = useContext(UserContext);
+  const { currUser } = useContext(userContext);
 
   const [formData, setFormData] = useState({
-    username: "",
-    firstName: "",
-    lastName: "",
-    email: "",
+    username: currUser.username,
+    firstName: currUser.firstName,
+    lastName: currUser.lastName,
+    email: currUser.email,
   });
   const [errors, setErrors] = useState([]);
 
-  useEffect(() => {
-    if (currUser) {
-      setFormData({
-        username: currUser.username,
-        firstName: currUser.firstName,
-        lastName: currUser.lastName,
-        email: currUser.email,
-      });
-    }
-  }, [currUser]);
+  // useEffect(() => {
+  //   if (currUser) {
+  //     setFormData({
+  //       username: currUser.username,
+  //       firstName: currUser.firstName,
+  //       lastName: currUser.lastName,
+  //       email: currUser.email,
+  //     });
+  //   }
+  // }, [currUser]);
 
   /**Handles the input change. */
   function handleChange(evt) {
@@ -59,22 +59,22 @@ function ProfileForm({ editProfile }) {
   /**Handle form submission. */
   async function handleSubmit(evt) {
     evt.preventDefault();
+    const copy = { ...formData };
+    delete copy["username"];
     try {
       // make axios call
-      const copy = { ...formData };
-      delete copy["username"];
       await editProfile(currUser.username, copy);
-      navigate("/");
       // reroute to main page
+      navigate("/");
     } catch (err) {
       // set errors
-      setErrors((prevErrors) => [...prevErrors, err]);
+      setErrors([err]);
     }
   }
 
-  if (!currUser) {
-    return <MySpinner />;
-  }
+  // if (!currUser) {
+  //   return <MySpinner />;
+  // }
 
   return (
     <Form className="ProfileForm container" onSubmit={handleSubmit}>
@@ -112,7 +112,7 @@ function ProfileForm({ editProfile }) {
           required
         />
       </Form.Group>
-      {errors.length > 0 && <Alert errors={errors} />}
+      {errors.length > 0 && <MyAlert errors={errors} />}
       <Button as="button" className="btn btn-primary">
         Submit
       </Button>

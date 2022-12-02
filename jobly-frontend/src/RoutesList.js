@@ -7,7 +7,7 @@ import JobList from "./JobList";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 import ProfileForm from "./ProfileForm";
-import UserContext from "./UserContext";
+import userContext from "./userContext";
 
 /**
  * RoutesList:
@@ -20,10 +20,11 @@ import UserContext from "./UserContext";
  *
  * App -> RoutesList -> Routes
  */
+// TODO: context in docstring
 function RoutesList({ login, signUp, editProfile }) {
   console.log("RoutesList");
 
-  const { currUser } = useContext(UserContext);
+  const { currUser } = useContext(userContext);
 
   return (
     <Routes>

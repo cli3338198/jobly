@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Spinner from "./Spinner";
+import MySpinner from "./MySpinner";
 import SearchForm from "./SearchForm";
 import CompanyCard from "./CompanyCard";
 import JoblyApi from "./api";
@@ -24,6 +24,8 @@ function CompanyList() {
     search();
   }, []);
 
+  // TODO: log if no currUser,
+
   /**Search for companies and sets the companies state.
    * Called from SearchForm and useEffect.
    */
@@ -36,7 +38,7 @@ function CompanyList() {
   }
 
   if (companies === null) {
-    return <Spinner />;
+    return <MySpinner />;
   }
 
   return (
