@@ -57,18 +57,27 @@ class JoblyApi {
     return res.jobs;
   }
 
+  /** Sign up */
   static async signUp(data) {
     const res = await this.request("auth/register", data, "post");
     return res.token;
   }
 
+  /** Login */
   static async login(data) {
     const res = await this.request("auth/token", data, "post");
     return res.token;
   }
 
+  /** Edit profile */
   static async editProfile(username, data) {
     const res = await this.request(`users/${username}`, data, "patch");
+    return res.user;
+  }
+
+  /**Get user data */
+  static async getUser(username) {
+    const res = await this.request(`users/${username}`);
     return res.user;
   }
 }

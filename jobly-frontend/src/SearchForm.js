@@ -6,7 +6,7 @@ import { debounce } from "./utils";
 /**
  * SearchForm:
  *
- * Props: search - function, to be called in parent
+ * Props: searchFor - function, to be called in parent
  *
  * State: value - string
  *

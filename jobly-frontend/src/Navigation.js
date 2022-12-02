@@ -17,6 +17,7 @@ import UserContext from "./UserContext";
  */
 function Navigation({ logout }) {
   console.log("Navigation");
+
   const { currUser } = useContext(UserContext);
 
   return (
@@ -26,28 +27,34 @@ function Navigation({ logout }) {
           <NavLink to="/">Jobly</NavLink>
         </Navbar.Brand>
         <Nav className="nav-right">
-          {currUser && <>
-          <Nav.Link as="span">
-            <NavLink to="/companies">Companies</NavLink>
-          </Nav.Link>
-          <Nav.Link as="span">
-            <NavLink to="/jobs">Jobs</NavLink>
-          </Nav.Link>
-          <Nav.Link as="span">
-            <NavLink to="/profile">Profile</NavLink>
-          </Nav.Link>
-          <Nav.Link as="span">
-            <NavLink to="/" onClick={logout}>Logout</NavLink>
-          </Nav.Link>
-          </>}
-          {!currUser && <>
-          <Nav.Link as="span">
-            <NavLink to="/signup">Register</NavLink>
-          </Nav.Link>
-          <Nav.Link as="span">
-            <NavLink to="/login">Login</NavLink>
-          </Nav.Link>
-          </>}
+          {currUser && (
+            <>
+              <Nav.Link as="span">
+                <NavLink to="/companies">Companies</NavLink>
+              </Nav.Link>
+              <Nav.Link as="span">
+                <NavLink to="/jobs">Jobs</NavLink>
+              </Nav.Link>
+              <Nav.Link as="span">
+                <NavLink to="/profile">Profile</NavLink>
+              </Nav.Link>
+              <Nav.Link as="span">
+                <NavLink to="/" onClick={logout}>
+                  Logout {currUser.username}
+                </NavLink>
+              </Nav.Link>
+            </>
+          )}
+          {!currUser && (
+            <>
+              <Nav.Link as="span">
+                <NavLink to="/signup">Register</NavLink>
+              </Nav.Link>
+              <Nav.Link as="span">
+                <NavLink to="/login">Login</NavLink>
+              </Nav.Link>
+            </>
+          )}
         </Nav>
       </Container>
     </Navbar>

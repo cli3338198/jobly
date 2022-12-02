@@ -73,7 +73,7 @@ function LoginForm({ login }) {
           required
         />
       </Form.Group>
-      {errors.length > 0 && errors.map((e, i) => <Alert key={i} err={e} />)}
+      {errors.length > 0 && <Alert errors={errors} />}
       <Button as="button" className="btn btn-primary">
         Submit
       </Button>

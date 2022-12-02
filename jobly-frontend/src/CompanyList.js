@@ -10,6 +10,7 @@ import JoblyApi from "./api";
  * Props: none
  *
  * State: companies: list of objects like [{name: "", description: "", jobs: [...]}, ...{...}]
+ *        currSearch: string
  *
  * Routes -> CompanyList -> { SearchForm, CompanyCard }
  */

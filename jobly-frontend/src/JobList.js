@@ -22,8 +22,9 @@ import JoblyApi from "./api";
  */
 function JobList() {
   const [jobs, setJobs] = useState(null);
+  const [currSearch, setCurrSearch] = useState();
 
-  console.log("JobList");
+  console.log("JobList", currSearch);
 
   useEffect(() => {
     search();
@@ -37,6 +38,7 @@ function JobList() {
       searchTerm.length > 0 ? { title: searchTerm } : {}
     );
     setJobs(jobsResults);
+    setCurrSearch(searchTerm);
   }
 
   if (jobs === null) {

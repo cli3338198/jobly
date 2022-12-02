@@ -48,22 +48,20 @@ function SignUpForm({ signUp }) {
   /**Handle form submission. */
   async function handleSubmit(evt) {
     evt.preventDefault();
-    if(formData.password !== formData.confirmPassword) {
-      console.log("Error happened here!!!!!")
-      setErrors(errs => [...errs, "Passwords do not match"])
+    if (formData.password !== formData.confirmPassword) {
+      setErrors((errs) => [...errs, "Passwords do not match"]);
       return;
     }
     try {
       // make axios call
-      const copy = {...formData};
-      delete copy["confirmPassword"]
+      const copy = { ...formData };
+      delete copy["confirmPassword"];
       await signUp(copy);
       navigate("/");
       // reroute to main page
     } catch (err) {
       // set errors
-      console.log(err, "<-------------");
-      setErrors(errs => [...errs, err]);
+      setErrors((errs) => [...errs, err]);
     } finally {
       setTimeout(() => setErrors([]), 5000);
     }

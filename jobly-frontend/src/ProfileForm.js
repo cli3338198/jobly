@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Form";
 import Alert from "./Alert";
+import UserContext from "./UserContext";
+import MySpinner from "./Spinner";
 
 /**
  * ProfileForm:
@@ -24,13 +26,26 @@ function ProfileForm({ editProfile }) {
 
   const navigate = useNavigate();
 
+  const { currUser } = useContext(UserContext);
+
   const [formData, setFormData] = useState({
     username: "",
-    first: "",
-    last: "",
+    firstName: "",
+    lastName: "",
     email: "",
   });
   const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    if (currUser) {
+      setFormData({
+        username: currUser.username,
+        firstName: currUser.firstName,
+        lastName: currUser.lastName,
+        email: currUser.email,
+      });
+    }
+  }, [currUser]);
 
   /**Handles the input change. */
   function handleChange(evt) {
@@ -46,14 +61,19 @@ function ProfileForm({ editProfile }) {
     evt.preventDefault();
     try {
       // make axios call
-      await editProfile(formData);
+      const copy = { ...formData };
+      delete copy["username"];
+      await editProfile(currUser.username, copy);
       navigate("/");
       // reroute to main page
     } catch (err) {
       // set errors
-      console.log(err);
       setErrors((prevErrors) => [...prevErrors, err]);
     }
+  }
+
+  if (!currUser) {
+    return <MySpinner />;
   }
 
   return (
@@ -67,8 +87,8 @@ function ProfileForm({ editProfile }) {
       <Form.Group>
         <Form.Label>First Name:</Form.Label>
         <Form.Control
-          value={formData.first}
-          name="first"
+          value={formData.firstName}
+          name="firstName"
           onChange={handleChange}
           required
         />
@@ -76,8 +96,8 @@ function ProfileForm({ editProfile }) {
       <Form.Group>
         <Form.Label>Last Name:</Form.Label>
         <Form.Control
-          value={formData.last}
-          name="last"
+          value={formData.lastName}
+          name="lastName"
           onChange={handleChange}
           required
         />
@@ -92,7 +112,7 @@ function ProfileForm({ editProfile }) {
           required
         />
       </Form.Group>
-      {errors.length > 0 && errors.map((e, i) => <Alert key={i} err={e} />)}
+      {errors.length > 0 && <Alert errors={errors} />}
       <Button as="button" className="btn btn-primary">
         Submit
       </Button>
