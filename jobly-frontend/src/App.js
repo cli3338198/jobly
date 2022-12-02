@@ -42,6 +42,7 @@ function App() {
       JoblyApi.token = token;
       const userResult = await JoblyApi.getUser(username);
       setCurrUser(userResult);
+      setApplicationIds(userResult.applications);
     }
     if (token) {
       getUser();
