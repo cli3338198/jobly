@@ -41,7 +41,7 @@ function JobCard({ id, title, salary, equity, companyName }) {
         <Card.Text className="m-0">Salary: {salary}</Card.Text>
         <Card.Text className="m-0">Equity: {equity}</Card.Text>
         <Button
-          className="JobCard-Btn"
+          className={`JobCard-Btn ${applied ? "btn-success": "btn-primary"}`}
           onClick={handleApply}
           disabled={applied}>
           {applied ? "Applied" : "Apply"}
@@ -49,7 +49,6 @@ function JobCard({ id, title, salary, equity, companyName }) {
       </Card.Body>
     </Card>
   );
-  // TODO: Apply Button
 }
 
 export default JobCard;
