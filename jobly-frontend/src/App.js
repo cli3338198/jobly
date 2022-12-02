@@ -23,6 +23,9 @@ function App() {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   // const [token, setToken] = useState(null);
   const [currUser, setCurrUser] = useState(null);
+  const [applicationIds, setApplicationIds] = useState([]);
+  console.log(currUser);
+  console.log(applicationIds, "<-----------appIds")
 
   // DON'T NEED
   // useEffect(() => {
@@ -73,6 +76,16 @@ function App() {
     localStorage.removeItem("token");
   }
 
+  function hasApplied(id) {
+    return applicationIds.includes(id);
+  }
+
+  async function applyToJob(id) {
+    if(hasApplied(id)) return;
+    await JoblyApi.applyToJob(currUser.username, id);
+    setApplicationIds([...applicationIds, id]);
+  }
+
   if (token && !currUser) {
     return <MySpinner />;
   }
@@ -82,6 +95,8 @@ function App() {
       <userContext.Provider
         value={{
           currUser,
+          applyToJob,
+          hasApplied
         }}
       >
         <BrowserRouter>

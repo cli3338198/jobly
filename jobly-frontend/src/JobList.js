@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MySpinner from "./MySpinner";
 import SearchForm from "./SearchForm";
 import JobCard from "./JobCard";
 import JoblyApi from "./api";
+import userContext from "./userContext";
 
 /**
  * JobList:
@@ -17,6 +18,9 @@ import JoblyApi from "./api";
  *          salary: 110000,
  *          title: ""},
  *            ...{...}]
+ *        currSearch - string
+ *
+ * Context: currUser
  *
  * Routes -> JobList -> { JobCard, SearchForm }
  */
@@ -24,11 +28,15 @@ function JobList() {
   const [jobs, setJobs] = useState(null);
   const [currSearch, setCurrSearch] = useState();
 
+  const { currUser } = useContext(userContext);
+
   console.log("JobList", currSearch);
 
   useEffect(() => {
     search();
   }, []);
+
+  if(!currUser) return null;
 
   /**Search for jobs and sets the jobs state.
    * Called from SearchForm and useEffect.

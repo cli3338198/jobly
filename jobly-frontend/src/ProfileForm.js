@@ -19,6 +19,8 @@ import MySpinner from "./MySpinner";
   }
           errors - array of Errors
  *
+ * Context: currUser
+ *
  * App -> Routes -> ProfileForm
  */
 function ProfileForm({ editProfile }) {
@@ -35,6 +37,8 @@ function ProfileForm({ editProfile }) {
     email: currUser.email,
   });
   const [errors, setErrors] = useState([]);
+
+  if(!currUser) return null;
 
   // useEffect(() => {
   //   if (currUser) {

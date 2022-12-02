@@ -75,10 +75,16 @@ class JoblyApi {
     return res.user;
   }
 
-  /**Get user data */
+  /** Get user data */
   static async getUser(username) {
     const res = await this.request(`users/${username}`);
     return res.user;
+  }
+
+  /** Apply to job */
+  static async applyToJob(username, id) {
+    const res = await this.request(`users/${username}/jobs/${id}`, {}, "post")
+    return res.applied;
   }
 }
 

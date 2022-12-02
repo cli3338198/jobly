@@ -21,7 +21,7 @@ function SearchForm({ searchFor }) {
   /**Handle the input change. */
   function handleChange(evt) {
     setValue(evt.target.value);
-    searchFor(evt.target.value);
+    searchFor(evt.target.value.trim());
   }
 
   return (
