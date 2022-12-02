@@ -49,7 +49,7 @@ function SignUpForm({ signUp }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      setErrors((errs) => [...errs, "Passwords do not match"]);
+      setErrors(["Passwords do not match"]);
       return;
     }
     try {
@@ -61,9 +61,7 @@ function SignUpForm({ signUp }) {
       // reroute to main page
     } catch (err) {
       // set errors
-      setErrors((errs) => [...errs, err]);
-    } finally {
-      setTimeout(() => setErrors([]), 5000);
+      setErrors(err);
     }
   }
 
@@ -136,3 +134,4 @@ function SignUpForm({ signUp }) {
 }
 
 export default SignUpForm;
+// TODO: error location!

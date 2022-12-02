@@ -28,24 +28,23 @@ function RoutesList({ login, signUp, editProfile }) {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
-      <Route
-        path="/companies/:handle"
-        element={currUser ? <CompanyDetail /> : <Navigate to="/" />}
-      />
-      <Route
-        path="/companies"
-        element={currUser ? <CompanyList /> : <Navigate to="/" />}
-      />
-      <Route
-        path="/jobs"
-        element={currUser ? <JobList /> : <Navigate to="/" />}
-      />
-      <Route path="/login" element={<LoginForm login={login} />} />
-      <Route path="/signup" element={<SignUpForm signUp={signUp} />} />
-      <Route
-        path="/profile"
-        element={<ProfileForm editProfile={editProfile} />}
-      />
+      {currUser && (
+        <>
+          <Route path="/companies/:handle" element={<CompanyDetail />} />
+          <Route path="/companies" element={<CompanyList />} />
+          <Route path="/jobs" element={<JobList />} />
+          <Route
+            path="/profile"
+            element={<ProfileForm editProfile={editProfile} />}
+          />
+        </>
+      )}
+      {!currUser && (
+        <>
+          <Route path="/login" element={<LoginForm login={login} />} />
+          <Route path="/signup" element={<SignUpForm signUp={signUp} />} />
+        </>
+      )}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

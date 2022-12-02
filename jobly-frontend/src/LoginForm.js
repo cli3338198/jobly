@@ -47,7 +47,7 @@ function LoginForm({ login }) {
       // reroute to main page
     } catch (err) {
       // set errors
-      setErrors((prevErrors) => [...prevErrors, err]);
+      setErrors(err);
     }
   }
 

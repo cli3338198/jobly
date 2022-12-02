@@ -32,13 +32,15 @@ function App() {
 
   useEffect(() => {
     async function getUser() {
-      const { username } = await jwt_decode(token);
+      const { username } = jwt_decode(token);
       JoblyApi.token = token;
       const userResult = await JoblyApi.getUser(username);
       setCurrUser(userResult);
     }
     if (token) {
       getUser();
+    } else {
+      setCurrUser(null);
     }
   }, [token]);
 
@@ -65,7 +67,10 @@ function App() {
   async function logout() {
     setCurrUser(null);
     setToken(null);
+    localStorage.removeItem("token");
   }
+
+  //TODO: spinner loading
 
   return (
     <div className="App">
