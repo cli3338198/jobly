@@ -2,17 +2,18 @@ import Alert from "react-bootstrap/Alert";
 /**
  * MyAlert:
  *
- * Props: errors - list of Errors
+ * Props: messages - list of messages
+ *        variant - string
  *
  * State:
  *
  * {} -> Alert
  */
-function MyAlert({ errors = [] }) {
+function MyAlert({ messages = [], variant = "danger" }) {
   return (
-    <Alert className="mt-3" variant="danger">
-      {errors.map((err, i) => (
-        <p key={i}>{err}</p>
+    <Alert className="mt-3" variant={ variant }>
+      {messages.map((msg, i) => (
+        <p key={i}>{msg}</p>
       ))}
     </Alert>
   );

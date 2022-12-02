@@ -116,7 +116,7 @@ function ProfileForm({ editProfile }) {
           required
         />
       </Form.Group>
-      {errors.length > 0 && <MyAlert errors={errors} />}
+      {errors.length > 0 && <MyAlert messages={errors} />}
       <Button as="button" className="btn btn-primary">
         Submit
       </Button>
