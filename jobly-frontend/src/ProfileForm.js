@@ -1,10 +1,9 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Form";
 import MyAlert from "./MyAlert";
 import userContext from "./userContext";
-import MySpinner from "./MySpinner";
 
 /**
  * ProfileForm:
