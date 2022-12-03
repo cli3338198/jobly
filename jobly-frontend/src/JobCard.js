@@ -15,7 +15,7 @@ import userContext from "./userContext";
  *
  * State: none
  *
- * { JobList, CompanyDetail }  -> JobCard
+ * { JobList, CompanyDetail, UserJobs }  -> JobCard
  */
 function JobCard({ id, title, salary, equity, companyName }) {
   console.log("JobCard");

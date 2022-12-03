@@ -67,7 +67,7 @@ function App() {
   /** Edit user profile */
   async function editProfile(username, profileData) {
     const userResult = await JoblyApi.editProfile(username, profileData);
-    setCurrUser(userResult);
+    setCurrUser(user => ({...user, ...userResult}));
   }
 
   /** Handles logout */

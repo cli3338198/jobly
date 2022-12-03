@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import UserJobs from "./UserJobs"
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Form";
 import MyAlert from "./MyAlert";
 import userContext from "./userContext";
+import "./ProfileForm.css"
 
 /**
  * ProfileForm:
@@ -80,46 +82,51 @@ function ProfileForm({ editProfile }) {
   // }
 
   return (
-    <Form className="ProfileForm container" onSubmit={handleSubmit}>
-      <Form.Text as="h1">Sign Up</Form.Text>
-      <Form.Group>
-        <Form.Label>Username:</Form.Label>
-        <Form.Control value={formData.username} name="username" disabled />
-      </Form.Group>
+    <div className="ProfileForm">
+      <Form className="container" onSubmit={handleSubmit}>
+        <Form.Text as="h1" className="ProfileForm-title mt-3">
+          {currUser.username}'s Profile
+        </Form.Text>
+        <Form.Group>
+          <Form.Label className="ProfileForm-username">Username:</Form.Label>
+          <Form.Control value={formData.username} name="username" disabled />
+        </Form.Group>
 
-      <Form.Group>
-        <Form.Label>First Name:</Form.Label>
-        <Form.Control
-          value={formData.firstName}
-          name="firstName"
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Last Name:</Form.Label>
-        <Form.Control
-          value={formData.lastName}
-          name="lastName"
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Email:</Form.Label>
-        <Form.Control
-          value={formData.email}
-          type="email"
-          name="email"
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
-      {errors.length > 0 && <MyAlert messages={errors} />}
-      <Button as="button" className="btn btn-primary">
-        Submit
-      </Button>
-    </Form>
+        <Form.Group>
+          <Form.Label className="ProfileForm-firstname">First Name:</Form.Label>
+          <Form.Control
+            value={formData.firstName}
+            name="firstName"
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label className="ProfileForm-lastname">Last Name:</Form.Label>
+          <Form.Control
+            value={formData.lastName}
+            name="lastName"
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label className="ProfileForm-email">Email:</Form.Label>
+          <Form.Control
+            value={formData.email}
+            type="email"
+            name="email"
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
+        {errors.length > 0 && <MyAlert messages={errors} />}
+        <Button as="button" className="btn btn-primary mt-3">
+          Edit Profile
+        </Button>
+      </Form>
+      <UserJobs />
+    </div>
   );
 }
 

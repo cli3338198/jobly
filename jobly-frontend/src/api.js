@@ -83,8 +83,20 @@ class JoblyApi {
 
   /** Apply to job */
   static async applyToJob(username, id) {
-    const res = await this.request(`users/${username}/jobs/${id}`, {}, "post")
+    const res = await this.request(`users/${username}/jobs/${id}`, {}, "post");
     return res.applied;
+  }
+
+  /** Get job data */
+  static async getJob(id) {
+    const res = await this.request(`jobs/${id}`);
+    return res
+  }
+
+  /** Unapply to job */
+  static async unapplyToJob(username, id) {
+    const res = await this.request(`users/${username}/jobs/${id}`, {}, "delete");
+    return res.unapplied;
   }
 }
 
