@@ -24,8 +24,6 @@ function App() {
   // const [token, setToken] = useState(null);
   const [currUser, setCurrUser] = useState(null);
   const [applicationIds, setApplicationIds] = useState([]);
-  console.log(currUser);
-  console.log(applicationIds, "<-----------appIds")
 
   // DON'T NEED
   // useEffect(() => {
@@ -35,6 +33,12 @@ function App() {
   //     setToken(localToken);
   //   }
   // }, []);
+
+  useEffect(() => {
+    if (currUser) {
+      setApplicationIds(currUser.applications);
+    }
+  }, [currUser]);
 
   useEffect(() => {
     async function getUser() {
@@ -67,7 +71,7 @@ function App() {
   /** Edit user profile */
   async function editProfile(username, profileData) {
     const userResult = await JoblyApi.editProfile(username, profileData);
-    setCurrUser(user => ({...user, ...userResult}));
+    setCurrUser((user) => ({ ...user, ...userResult }));
   }
 
   /** Handles logout */
@@ -78,13 +82,20 @@ function App() {
   }
 
   function hasApplied(id) {
+    console.log({ applicationIds, id });
     return applicationIds.includes(id);
   }
 
   async function applyToJob(id) {
-    if(hasApplied(id)) return;
+    if (hasApplied(id)) return;
     await JoblyApi.applyToJob(currUser.username, id);
     setApplicationIds([...applicationIds, id]);
+  }
+
+  async function unapplyToJob(id) {
+    if (!hasApplied(id)) return;
+    await JoblyApi.unapplyToJob(currUser.username, id);
+    setApplicationIds(applicationIds.filter((j) => j !== id));
   }
 
   if (token && !currUser) {
@@ -97,7 +108,9 @@ function App() {
         value={{
           currUser,
           applyToJob,
-          hasApplied
+          hasApplied,
+          unapplyToJob,
+          applicationIds,
         }}
       >
         <BrowserRouter>

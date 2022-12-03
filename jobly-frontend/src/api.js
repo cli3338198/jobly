@@ -90,12 +90,17 @@ class JoblyApi {
   /** Get job data */
   static async getJob(id) {
     const res = await this.request(`jobs/${id}`);
-    return res
+    return res;
   }
 
   /** Unapply to job */
   static async unapplyToJob(username, id) {
-    const res = await this.request(`users/${username}/jobs/${id}`, {}, "delete");
+    console.log(username, id, "<--------------");
+    const res = await this.request(
+      `users/${username}/jobs/${id}`,
+      {},
+      "delete"
+    );
     return res.unapplied;
   }
 }
