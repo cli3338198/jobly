@@ -179,9 +179,9 @@ class User {
         });
     const usernameVarIdx = "$" + (values.length + 1);
 
-    const querySql = `UPDATE users 
-                      SET ${setCols} 
-                      WHERE username = ${usernameVarIdx} 
+    const querySql = `UPDATE users
+                      SET ${setCols}
+                      WHERE username = ${usernameVarIdx}
                       RETURNING username,
                                 first_name AS "firstName",
                                 last_name AS "lastName",
@@ -238,6 +238,36 @@ class User {
           `INSERT INTO applications (job_id, username)
            VALUES ($1, $2)`,
         [jobId, username]);
+  }
+
+  /** Unapply for job: update db, returns undefined.
+   *
+   * - username: username unapplying for job
+   * - jobId: job id
+   **/
+
+   static async unapplyToJob(username, jobId) {
+    const preCheck = await db.query(
+          `SELECT id
+           FROM jobs
+           WHERE id = $1`, [jobId]);
+    const job = preCheck.rows[0];
+
+    if (!job) throw new NotFoundError(`No job: ${jobId}`);
+
+    const preCheck2 = await db.query(
+          `SELECT username
+           FROM users
+           WHERE username = $1`, [username]);
+    const user = preCheck2.rows[0];
+
+    if (!user) throw new NotFoundError(`No username: ${username}`);
+
+    await db.query(
+          `DELETE
+           FROM applications
+           WHERE job_id = $1`, [jobId]
+        );
   }
 }
 
