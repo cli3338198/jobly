@@ -74,7 +74,7 @@ function debounce(fn, ms) {
 </Form>;
 ```
 
-Came across an interesting design flaw/bug in our code when using tokens and localstorage. We initially had a useEffect that would fetch the token from localstorage when the component mounted but this would set the "currUser" which depends on the token to be set to "null" and kick the user out as if logged out. This is because in the component life cycle a useEffect runs after the component is rendered. The simple solution without having to rewrite our code to take into account this "intermediate" state was to have a callback in our "token" state setter. Good to keep in mind the order that React hooks run in!
+Note to self: Remember useEffect hooks runs after render and useState runs before!
 
 :heavy_check_mark: Initialize State before render
 
